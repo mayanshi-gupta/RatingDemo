@@ -1,0 +1,6 @@
+framework module Pods_RatingDemoTests {
+  umbrella header "Pods-RatingDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
