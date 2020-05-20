@@ -14,12 +14,14 @@ class SubmitRatingViewController: UIViewController {
     @IBOutlet weak var ratingSlider: UISlider!
     var minValue: Int?
     var MaxValue: Int?
-    let ratingModel = Rating()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setSlider()
+    }
+    
+    func setSlider() {
         ratingSlider.minimumValue = Float(minValue ?? 0)
         ratingSlider.maximumValue = Float(MaxValue ?? 9)
         ratingSlider.value = Float(MaxValue ?? 9)
@@ -32,11 +34,11 @@ class SubmitRatingViewController: UIViewController {
     
     
     @IBAction func submitBtnTapped(_ sender: Any) {
+        let ratingModel = Rating()
         ratingModel.rating = Int(ratingLbl.text ?? "0") ?? 0
         //add object to realm database
         DBManager.sharedInstance.addData(object: ratingModel)
+        setSlider()
         showAlert(withTitle: "", alertMessage: "Feedback has been saved")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {  self.navigationController?.popViewController(animated: true)
-        }
     }
 }
